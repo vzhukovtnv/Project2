@@ -19,4 +19,3 @@ const id ='60a294d8b5747f64409e1b5e';
 // clientDB.deleteClient(id);
  clientDB.updateClient(id, {password:"1234"});
  clientDB.updateClient(id, {balance:100});
-
