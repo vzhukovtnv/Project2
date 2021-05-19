@@ -59,11 +59,27 @@ async function getClientList(){
     return clientModel.find({},'role firstName lastName',).sort({lastName:1,firstName:1}).exec();
 }
 
+async function transferMoney(id, transf ){
+    let client = null;
+    try {
+        client = await clientModel.findById(id,'balance');
+        if (client){
+            client.balance +=  transf;
+            return clientModel.updateClient(id, client);
+        }
+    } catch (error) {
+        console.error("err=", err)
+
+    }
+    return client;
+}
+
 module.exports = {
     getClientById,
     //getClientPasswordById,
     deleteClient,
     updateClient,
     createClient,
-    getClientList
+    getClientList,
+    transferMoney
 }
