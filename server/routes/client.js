@@ -1,8 +1,19 @@
 var express = require('express');
-const { isValidObjectId } = require('mongoose');
 var router = express.Router();
 
 const clientDB = require('../data/client');
+
+
+router.get('/login/:userID/:password ', async (req, res) => {
+  let data = await clientDB.chkLogin( req.params.userId, req.params.password);
+  if (data) {
+    console.log("successful login");
+  }else{
+    data = {_id:""};
+    console.log("unsuccessful login");
+  }
+  res.send(data);
+});
 
 router.get('/', async (req, res) => {
   let data = await clientDB.getClientList();
@@ -16,10 +27,10 @@ router.post('/', async (req, res) => {
   try {
     await clientDB.createClient(clientToCreate);
     console.log("Created client", clientToCreate)
-    res.send(newSuperhero)
+    res.send(clientToCreate)
   }
   catch (error) {
-    console.log(error)
+    console.error("Creating client error: ",error)
     if (error.code === 11000) {
       res.status(409).send('Client ' + clientToCreate.firstName + ' already exists');
     }
@@ -42,7 +53,7 @@ router.get('/:id', async function (req, res) {
       res.send(foundClient);
     }
   } catch (error) {
-    console.log(error)
+    console.error("Getting client error: ",error)
     res.sendStatus(500)
   }
 });
@@ -56,10 +67,11 @@ router.put('/:id', async function (req, res) {
     res.send(data);
   }
   catch (error) {
-    console.log(error)
+    console.error("Updating client error:", error)
     res.sendStatus(500)
   }
 })
+
 
 router.delete("/:id", async (req, res) => {
   try {
@@ -72,7 +84,7 @@ router.delete("/:id", async (req, res) => {
       res.sendStatus(404);
     }
   } catch (error) {
-    console.error(error)
+    console.error("Deleting client error: ",error)
     res.sendStatus(500)
   }
 });
@@ -92,7 +104,7 @@ router.put('/:id/:transfer', async function (req, res) {
     }
   }
   catch (error) {
-    console.log(error)
+    console.log("Transferring money error: ",error)
     res.sendStatus(500)
   }
 })

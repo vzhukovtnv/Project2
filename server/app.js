@@ -4,8 +4,15 @@ var path 	= require('path');
 //var cookieParser= require('cookie-parser');
 //var logger 	= require('morgan');
 
+
+
+
+
 // IMPORT ROUTES
-var clientRouter = require('./routes/client');
+var serverSetting  = require('./models/loadServerSetting');
+var clientRouter   = require('./routes/client');
+
+
 
 var app = express();
 

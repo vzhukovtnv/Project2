@@ -1,3 +1,4 @@
+require("../models/appSmall")
 const stocks = require('../data/timeSeriesStock');
 console.log("Start")
 //stocksDB.checkIfCollectionExists("tt").then((t) => {console.log(t)});
@@ -5,5 +6,5 @@ console.log("Start")
 //     console.log("company=",company);
 // })
 
-stocks.intradayStocks("IBM").then(stocks => console.log("stocks=", stocks)); 
+stocks.intradayStocks("AMD").then(stocks => console.log("stocks=", stocks)); 
 console.log("End")

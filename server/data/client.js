@@ -14,7 +14,10 @@ const clientSchema = new Schema({
         required: true
     },
     birthdate: Date,
-    eMail: String,
+    eMail: {
+        type: String,
+        required: true
+    },
     phone: String,
     balance: Number,
     password: String,
@@ -27,7 +30,7 @@ async function getClientById(id) {
     let client = null;
     try {
         client = clientModel.findById(id)
-    } catch (error) {
+    } catch (err) {
         console.error("err=", err)
     }
     return client;
@@ -42,37 +45,48 @@ async function getClientById(id) {
 //     }
 //     return client;
 // }
-async function deleteClient(id)
-{
+async function deleteClient(id) {
     return clientModel.findByIdAndDelete(id);
 }
 
-async function updateClient(id, updClient){
-    return clientModel.findByIdAndUpdate(id, updClient);
+async function updateClient(id, updClient) {
+    return clientModel.findByIdAndUpadte(id, updClient);
 }
 
-async function createClient(newClient){
+async function createClient(newClient) {
     return clientModel.create(newClient);
 }
 
-async function getClientList(){
-    return clientModel.find({},'role firstName lastName',).sort({lastName:1,firstName:1}).exec();
+async function getClientList() {
+    return clientModel.find({}, 'role firstName lastName',).sort({ lastName: 1, firstName: 1 }).exec();
 }
 
-async function transferMoney(id, transf ){
+async function transferMoney(id, transf) {
     let client = null;
     try {
-        client = await clientModel.findById(id,'balance');
-        if (client){
-            client.balance +=  transf;
+        client = await clientModel.findById(id, 'balance');
+        if (client) {
+            client.balance += transf;
             return clientModel.updateClient(id, client);
         }
-    } catch (error) {
+    } catch (err) {
         console.error("err=", err)
 
     }
     return client;
 }
+
+async function chkLogin(eMail, password) {
+    let client = null;
+    try {
+        client = clientModel.findOne({ eMail, password }, 'role');
+        return client;
+    } catch (err) {
+        console.error("err=", err)
+    }
+    return client;
+}
+
 
 module.exports = {
     getClientById,
@@ -81,5 +95,6 @@ module.exports = {
     updateClient,
     createClient,
     getClientList,
-    transferMoney
+    transferMoney,
+    chkLogin
 }
