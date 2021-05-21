@@ -5,6 +5,7 @@ const clientDB = require('../data/client');
 
 
 router.get('/login/:userID/:password ', async (req, res) => {
+  console.log("Some login come ",  req.params)
   let data = await clientDB.chkLogin( req.params.userId, req.params.password);
   if (data) {
     console.log("successful login");
@@ -17,7 +18,7 @@ router.get('/login/:userID/:password ', async (req, res) => {
 
 router.get('/', async (req, res) => {
   let data = await clientDB.getClientList();
-  console.info(`records retrieved from mongoose:`, data?.length)
+  console.info(`Clients retrieved: `, data?.length)
   res.send(data);
 });
 
@@ -42,6 +43,7 @@ router.post('/', async (req, res) => {
 
 
 router.get('/:id', async function (req, res) {
+  console.log("Client get");
   try {
     let foundClient = await clientDB.getClientById( req.params.id);
     if (!foundClient ) {

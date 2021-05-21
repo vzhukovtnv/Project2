@@ -3,31 +3,38 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
-// import Navbar         from './components/Navbar';
-// import Home           from './components/Home';
-// import Create         from './components/Create';
-// import ClientDetails  from './components/ClientDetails';
-// import TransferMoney  from './components/TransferMoney';
-import NotFound       from './components/NotFound';
-import Login          from './components/Login';
+import Titlebar       from './components/Titlebar';
+import Home           from './pages/Home';
+import NotFound       from './pages/NotFound';
+import Login          from './pages/Login';
+import Admin          from './pages/Admin';
+import Stocks         from './pages/Stocks';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        {/* <Navbar /> */}
+        <Titlebar />
         <div className="content">
           <Switch>
-            <Route path= "/client/login">
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path= "/login">
               <Login />
             </Route>
-            {/* <Route exact path="/">
-              <h1>Hello Storks !</h1>
+            <Route path= "/admin/:clientID">
+              <Admin/>
             </Route>
+            <Route path= "/stocks/:clientID">
+              <Admin/>
+            </Route>
+
+
+            {/* 
             <Route path="/clients/create">
               <Create />
             </Route>

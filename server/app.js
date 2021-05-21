@@ -9,9 +9,9 @@ var path 	= require('path');
 
 
 // IMPORT ROUTES
-var serverSetting  = require('./models/loadServerSetting');
-var clientRouter   = require('./routes/client');
-
+const serverSetting  = require('./models/loadServerSetting');
+const clientRouter   = require('./routes/client');
+const companyRouter  = require('./routes/company');
 
 
 var app = express();
@@ -22,7 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
 
 // USE ROUTES
-app.use('/clients', clientRouter);
+app.use('/client', clientRouter);
+app.use('/company', companyRouter);
 
 // serve the react application
 app.use(express.static('../client/build'))
@@ -40,7 +41,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send('error');
+  res.send('error !');
 });
 
 module.exports = app;
