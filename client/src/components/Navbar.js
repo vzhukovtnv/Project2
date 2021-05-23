@@ -1,26 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import React, { useEffect, useState } from 'react';
 
 //import useFetch from "../utils/useFetch";
 
-const Navbar = (param) => {
+const Navbar = ({pageName, id}) => {
+
     let isHome = false;
     let isLogin = false;
     let isLogout = false;
     let isSignUp = false;
+    let isModifyClient =false;
     let isSetting = false;
     let isAdmin = false;
-    switch (param.pageName) {
+    let isStock =false;
+    switch (pageName) {
         case 'Home':
             isLogin = true;
             isSignUp = true;
             break;
         case 'Login':
+        case 'Registration':
             isHome = true;
             break
         case 'SignUp':
             isHome = true;
             break;
+        case 'ModifyClientPage':
+            isHome = true;
+            isStock = true;
+            break;
+
         case 'Admin':
             isHome = true;
             isSetting = true;
@@ -32,6 +41,7 @@ const Navbar = (param) => {
             break;
         case 'Stocks':
             isHome = true;
+            isModifyClient =true;
             break;
 
 
@@ -54,9 +64,18 @@ const Navbar = (param) => {
                     <Link to="/signup">Sign up</Link>
                 </span>}
 
+                {isModifyClient && <span>
+                    <Link to={"/modifyClient/"+id}>Modify personal information</Link>
+                </span>}
+
                 {isAdmin && <span>
                     <Link to="/admin">Administrator</Link>
                 </span>}
+
+                {isStock && <span>
+                    <Link to={"/stocks/"+id}>Stocks</Link>
+                </span>}
+
 
                 {isSetting && <span>
                     <Link to="/setting">Setting</Link>

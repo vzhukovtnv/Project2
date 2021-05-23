@@ -50,7 +50,8 @@ async function deleteClient(id) {
 }
 
 async function updateClient(id, updClient) {
-    return clientModel.findByIdAndUpadte(id, updClient);
+    console.log("Before")
+    return clientModel.findByIdAndUpdate(id, updClient);                   
 }
 
 async function createClient(newClient) {

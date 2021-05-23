@@ -42,7 +42,6 @@ router.post('/', async (req, res) => {
 
 
 router.get('/:id', async function (req, res) {
-  console.log("Client get");
   try {
     let foundClient = await clientDB.getClientById( req.params.id);
     if (!foundClient ) {
@@ -50,7 +49,8 @@ router.get('/:id', async function (req, res) {
       res.sendStatus(500)
     }
     else {
-      console.info(`Found client:`, foundClient);
+      console.log("Client get");
+      //console.info(`Found client:`, foundClient);
       res.send(foundClient);
     }
   } catch (error) {
@@ -63,9 +63,9 @@ router.get('/:id', async function (req, res) {
 router.put('/:id', async function (req, res) {
   let updatedClient = req.body
   try {
-    await clientDB.updateClient(req.params.id, updatedClient);
-    console.log("Updated client", updatedClient)
+    const data = await clientDB.updateClient(req.params.id, updatedClient);
     res.send(data);
+    console.log("Updated client")
   }
   catch (error) {
     console.error("Updating client error:", error)
