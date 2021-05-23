@@ -4,27 +4,37 @@ import { useHistory } from "react-router-dom";
 import Navbar from "../components/Navbar"
 
 const Login = () => {
-    const [eMail,   setEmail]    = useState("");
-    const [password,setPassword] = useState("");
+    const [eMail,   setEmail]       = useState();
+    const [password,setPassword]    = useState();
+    const [error   ,setError]       = useState();
 
-    //  const history = useHistory();
+    const history = useHistory();
 
-    async function handleSubmit() {
+    async function handleSubmit(e) {
+        e.preventDefault();
         const url =`client/login/${eMail}/${password}`;
-        alert(url)
-        let response = await fetch(url);
-        let data = await response.json();
-        if (data){
-            alert("Click!");
-
-            console.log("data=", data)
-            if (data?._id !==""){
-                if (data.role > 0){
-                    //history.push("/Admin/"+ data._id)
-                }else{
-                    //history.push("/Stocks/"+ data._id)
-                }
+        try {
+            let response = await fetch(url);
+            if (!response.ok){
+                setError("Server Error ")
+                return;
             }
+            let data = await response.json();
+            if (data){
+                if (data._id.length > 10){
+                    history.push((data.role > 0) ?
+                            `/admin`:
+                            `/stocks/${data._id}`);
+                }else
+                {
+                    setError("User ID or password are not correct");
+                }
+            }else {
+                setError("Server Error 2");
+            }
+                
+        } catch (error) {
+            setError(error.message)            
         }
     }
 
@@ -40,6 +50,7 @@ const Login = () => {
                     <input
                         type="email"
                         name="eMail"
+                        id="eMail"
                         value={eMail}
                         className="input-field"
                         placeholder="Enter eMail"
@@ -50,6 +61,7 @@ const Login = () => {
                     <input
                         type="password"
                         name="password"
+                        id="password"
                         value={password}
                         className="input-field"
                         placeholder="Enter password"
@@ -58,6 +70,7 @@ const Login = () => {
                     />
                     <button className="submit-btn" onClick={handleSubmit}>Login</button>
                 </form>
+                {error && <h3>{error}</h3>}
             </div>
         </div>
 

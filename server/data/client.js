@@ -76,10 +76,11 @@ async function transferMoney(id, transf) {
     return client;
 }
 
-async function chkLogin(eMail, password) {
+async function chkLogin(eM, pas) {
     let client = null;
     try {
-        client = clientModel.findOne({ eMail, password }, 'role');
+        client = clientModel.findOne({ eMail:eM, password:pas }, 'role');
+        client;
         return client;
     } catch (err) {
         console.error("err=", err)

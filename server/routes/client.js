@@ -4,9 +4,8 @@ var router = express.Router();
 const clientDB = require('../data/client');
 
 
-router.get('/login/:userID/:password ', async (req, res) => {
-  console.log("Some login come ",  req.params)
-  let data = await clientDB.chkLogin( req.params.userId, req.params.password);
+router.get('/login/:userID/:password', async (req, res) => {
+  let data = await clientDB.chkLogin( req.params.userID, req.params.password);
   if (data) {
     console.log("successful login");
   }else{
@@ -55,7 +54,7 @@ router.get('/:id', async function (req, res) {
       res.send(foundClient);
     }
   } catch (error) {
-    console.error("Getting client error: ",error)
+    console.error("Getting finding client error: ",error)
     res.sendStatus(500)
   }
 });

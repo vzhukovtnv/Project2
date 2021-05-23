@@ -4,7 +4,7 @@ require('./db')
 
 const Schema = mongoose.Schema;
 
-const settingsSchema = new Schema({
+const settingSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -18,48 +18,48 @@ const settingsSchema = new Schema({
         enum: ["1min", "5min", "15min", "30min", "60min"],
         required: true
     },
-    comission:{
+    commission:{
         type: Number,
         required: true
     },
     balance: Number
 });
 
-const settingsModel = mongoose.model('Setting', settingsSchema, 'Settings');
+const settingModel = mongoose.model('Setting', settingSchema, 'Settings');
 
 async function getSetting(){ 
-    let settings = null;
+    let setting = null;
     try {
-        settings = settingsModel.findOne({}).exec();
+        setting = settingModel.findOne({}).exec();
     } catch (err) {
         //console.error("err=", err)
     }
-    return await settings;
+    return await setting;
 }
 
-async function setSetting(newSettings) {
-    let settings = null;
+async function setSetting(newSetting) {
+    let setting = null;
     try {
-        settings = settingsModel.findOneAndUpdate({},newSettings, {fields:{balance:0}, new:true, upsert:true});
+        setting = settingModel.findOneAndUpdate({},newSetting, {fields:{balance:0}, new:true, upsert:true});
     } catch (err) {
         console.error("err=", err)
     }
-    return settings;
+    return setting;
 }
 
 
 async function transferMoney( transf ){
-    let settings = null;
+    let setting = null;
     try {
-       settings = await settingsModel.findOne({}, "balance");
-       if (settings){
-            settings.balance +=  transf;
-            return settingsModel.findOneAndUpdate({}, settings,  {fields:{balance:1}, new:true})
+       setting = await settingModel.findOne({}, "balance");
+       if (setting){
+            setting.balance +=  transf;
+            return settingModel.findOneAndUpdate({}, setting,  {fields:{balance:1}, new:true})
         }
     } catch (err) {
         console.error("err=", err)
     }
-    return settings;
+    return setting;
 }
 
 module.exports = {

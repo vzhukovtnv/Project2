@@ -11,6 +11,7 @@ import Home           from './pages/Home';
 import NotFound       from './pages/NotFound';
 import Login          from './pages/Login';
 import Admin          from './pages/Admin';
+import Setting        from './pages/Setting';
 import Stocks         from './pages/Stocks';
 
 function App() {
@@ -26,11 +27,15 @@ function App() {
             <Route path= "/login">
               <Login />
             </Route>
-            <Route path= "/admin/:clientID">
-              <Admin/>
+            <Route path= "/admin">
+              <Admin />
             </Route>
+            <Route path= "/setting">
+              <Setting />
+            </Route>
+
             <Route path= "/stocks/:clientID">
-              <Admin/>
+              <Stocks/>
             </Route>
 
 

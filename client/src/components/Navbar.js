@@ -8,45 +8,38 @@ const Navbar = (param) => {
     let isLogin = false;
     let isLogout = false;
     let isSignUp = false;
+    let isSetting = false;
+    let isAdmin = false;
     switch (param.pageName) {
         case 'Home':
             isLogin = true;
             isSignUp = true;
             break;
         case 'Login':
-            isHome = true;          
+            isHome = true;
             break
         case 'SignUp':
             isHome = true;
             break;
         case 'Admin':
             isHome = true;
+            isSetting = true;
+            break;
+
+        case 'Setting':
+            isAdmin = true;
+            isHome = true;
             break;
         case 'Stocks':
             isHome = true;
             break;
-    
-            
+
+
         default:
             break;
     }
 
-    //const [name, setName] =useState("");
-
-    // useEffect(() => {
-    //     const getName = async () => {
-    //       //let response = await fetch('/company');
-    //       //let data = await response.json();
-    //       const { data: name, error, isPending } = useFetch("/company");
-    //       //setName(data.name);
-    //     };
-    //     getName();
-    //     console.log("name=", name);
-    // }, [])
-    
-   //     const { data, error, isPending } = useFetch("/company");
-
-return (
+    return (
         <nav className="navbar">
             <div className="title-bar">
                 {isHome && <span>
@@ -61,9 +54,18 @@ return (
                     <Link to="/signup">Sign up</Link>
                 </span>}
 
+                {isAdmin && <span>
+                    <Link to="/admin">Administrator</Link>
+                </span>}
+
+                {isSetting && <span>
+                    <Link to="/setting">Setting</Link>
+                </span>}
+
                 {isLogout && <span>
                     <Link to="/">Logout</Link>
                 </span>}
+
 
 
             </div>

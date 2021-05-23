@@ -1,13 +1,12 @@
 import Navbar from "../components/Navbar"
 const Stocks = () => {
     return (
-        <div >
-            <Navbar pageName="Stocks" />
-
-            <div >
-                <h1>Admin</h1>
-            </div>
-        </div>
+        <div> 
+            <Navbar pageName="Stocks" /> 
+            <div>  
+                <h1>Stocks</h1>
+             </div>     
+       </div>
     );
 }
 
