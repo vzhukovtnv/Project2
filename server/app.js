@@ -12,6 +12,7 @@ var path 	= require('path');
 const serverSetting  = require('./models/loadServerSetting');
 const clientRouter   = require('./routes/client');
 const companyRouter  = require('./routes/company');
+const stocksRouter  = require('./routes/stocks');
 
 
 var app = express();
@@ -22,8 +23,10 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
 
 // USE ROUTES
+app.use('/stocks', stocksRouter);
 app.use('/client', clientRouter);
 app.use('/company', companyRouter);
+
 
 // serve the react application
 app.use(express.static('../client/build'))

@@ -40,7 +40,7 @@ async function getSetting(){
 async function setSetting(newSetting) {
     let setting = null;
     try {
-        setting = settingModel.findOneAndUpdate({},newSetting, {fields:{balance:0}, new:true, upsert:true});
+        setting = settingModel.findOneAndUpdate({},newSetting,  {new:true, upsert:true});
     } catch (err) {
         console.error("err=", err)
     }
