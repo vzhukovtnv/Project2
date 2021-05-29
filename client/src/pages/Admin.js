@@ -1,17 +1,6 @@
 import Navbar from "../components/Navbar"
 import React, { useEffect, useState } from 'react';
 
-/*const Admin = () => {
-    return (
-        <div >
-            <Navbar pageName="Admin" />
-
-            <div >
-                <h1>Admin</h1>
-            </div>
-        </div>
-    );
-}*/
 
 const ClientList = () => {
     const [rows, setRows] = useState([]);
