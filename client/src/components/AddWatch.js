@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const AddWatch = ({id}) => {
+const AddWatch = ({id, createWatch}) => {
     const [idClient, setIdClient] = useState(id);
     const [symbol, setSymbol] = useState()
     

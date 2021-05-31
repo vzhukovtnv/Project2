@@ -47,8 +47,8 @@ const Stocks = () => {
     }, [id])
 
     function createWatch(symbol) {
-        let t = lastData;
-        t.push({ symbol, amount: 0, balance: 0, lastDate: "", open: 0, high: 0, low: 0, close: 0, volume: 0, name: "c", sector: "", industry: "", exchange: "" });
+        let t = JSON.parse(JSON.stringify(lastData));
+        t.push({ symbol, amount: 0, balance: 0, lastDate: "", open: 0, high: 0, low: 0, close: 0, volume: 0, name: "", sector: "", industry: "", exchange: "" });
         setLastData(t);
         return
     }
@@ -57,9 +57,10 @@ const Stocks = () => {
         let t = JSON.parse(JSON.stringify(lastData));
         for (let i = 0; i < t.length; i++) {
             if (t[i].symbol === symbol) {
-                alert(i.toString()+ t[i].symbol); 
-                setLastData(t.splice(i,1));
-                alert(t[i].symbol);
+                //alert(i.toString()+ t[i].symbol); 
+                t.splice(i,1);
+                setLastData(t);
+                //alert(t[i].symbol);
                 return
             }
         }
@@ -175,7 +176,9 @@ const Stocks = () => {
                     <tr>
                         <td>
                             <div>
-                                <AddWatch id={id} />
+                                <AddWatch 
+                                    id={id}
+                                    createWatch={createWatch} />
                                 {portfolioObj &&
                                     <Portfolio portfolioObj={portfolioObj} />
                                 }
