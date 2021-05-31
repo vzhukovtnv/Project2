@@ -74,6 +74,7 @@ async function fetchStock(id, isFullData = false) {
             portfolioArray.push(portfolioElement);
         }
     }
+    totalSum += balance;
     const portfolioObj = { balance, totalSum, portfolioArray }
     const resultOj = { portfolioObj, lastData };
     if (isFullData) {

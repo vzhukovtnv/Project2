@@ -16,17 +16,17 @@ const stocksRouter  = require('./routes/stocks');
 
 
 var app = express();
-
+//app.use(express.static(__dirname+"/public"))
 //app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //app.use(cookieParser());
 
 // USE ROUTES
-app.use('/stocks', stocksRouter);
+
 app.use('/client', clientRouter);
 app.use('/company', companyRouter);
-
+app.use('/api/stocks', stocksRouter);
 
 // serve the react application
 app.use(express.static('../client/build'))
@@ -40,6 +40,8 @@ app.use(function (req, res, next) {
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
+  console.error("* " + err.message);
+  //console.log(req);
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page

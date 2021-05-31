@@ -17,16 +17,17 @@ async function getWatchList(id){
 }
 
 async function add(id, symbol){
+    return {ok:"abc"};
     const stock =await stockDB.getOneStock(symbol);
     if (stock==null){
-        return null;
+        return false;
     }
    
     result = await watchListModel.findOne({client:id,symbol} );
     if (result !=null) {
-        return result;
+        return false;
     }   
-    return watchListModel.create({client:id, symbol});
+    return await watchListModel.create({client:id, symbol}) !=null;
 }
 
 async function takeAway(id, symbol){

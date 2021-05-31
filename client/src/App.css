@@ -1,14 +1,91 @@
+
+
 .title-bar {
-  background-color: blue;
-  color: white;
+  margin: 10px;
+  background-color: rgba(184, 182, 51, 0.575);
+  color: rgb(17, 17, 15);
   padding: 15px;
+  text-align: center;
 }
 
 .title-bar h1 {
-  margin: 0px;
+  margin: 10px;
 }
 
 .title-bar a {
-  color: white;
-  margin-right: 1em;
+  color: rgb(26, 24, 24);
+  margin-right: 20px;
 }
+
+.form-box {
+  
+  width: 180px;
+  height: 180px;
+  position: relative ;
+  margin: 6% auto;
+  background:rgba(184, 182, 51, 0.575);
+  padding: 100px;
+  
+  
+}
+ .login-btn 
+ { 
+   left: 60px ;
+  width: 220px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 1 1 20px 1px #c5cae92f ;
+  border-radius: 30px;
+
+ }
+ .email {
+  margin: auto;
+  position: relative;
+  text-align: center;
+  }
+ .password {
+margin: auto;
+position: relative;
+text-align: center;
+}
+
+/* Vladimir added for stocks part */
+
+.watch-element {
+  border-style: solid;
+  padding: 6px 12px;
+  border-radius: 12px;
+}
+
+.close-button-small {
+  float: right;
+  width:32px;
+  width:32px;
+}
+
+
+.top-bottom-arrow-button {
+  width:32px;
+  width:32px;
+}
+
+.top-bottom-div {
+  text-align:center;
+}
+
+.td-allign-right{
+  text-align: right;
+}
+
+.sell-amount-group{
+  float:right
+}
+
+.small-green-box{
+  width: 10px;
+  height:10px;
+  bottom:0 ;
+  background: chartreuse;
+  text-align: right;
+}
+/* Vladimir added for stocks part */

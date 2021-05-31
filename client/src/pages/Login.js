@@ -11,6 +11,7 @@ const Login = () => {
     const history = useHistory();
 
     async function handleSubmit(e) {
+        console.log('on handle submit');
         e.preventDefault();
         const url =`client/login/${eMail}/${password}`;
         try {
@@ -34,43 +35,53 @@ const Login = () => {
             }
                 
         } catch (error) {
+            console.log('caught error');
             setError(error.message)            
         }
     }
 
 
     return (
-        <div className="rpage" >
-            <div >
-                <Navbar pageName="Login" />
-            </div>
-            <div className="form-box" >
-                <form id="login" className="input-group">
-                    <label htmlFor="eMail">eMail:</label>
-                    <input
-                        type="email"
-                        name="eMail"
-                        id="eMail"
-                        value={eMail}
-                        className="input-field"
-                        placeholder="Enter eMail"
-                        required
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        value={password}
-                        className="input-field"
-                        placeholder="Enter password"
-                        required
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button className="submit-btn" onClick={handleSubmit}>Login</button>
-                </form>
-                {error && <h3>{error}</h3>}
+        <div className="container" >
+            <div className="col-4 offset-4">
+                <div className="card">
+                    <div className="card-body">
+                        <h4 className="card-title text-center">Login</h4>
+                        <div className="card-text">
+                            <form id="login">
+                                <div className="row-fluid">
+                                    <label for="eMail" className="form-label">Email</label>
+                                    <input type="email"
+                                        name="eMail"
+                                        id="eMail"
+                                        value={eMail}
+                                        placeholder="email"
+                                        required
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        type="email"
+                                        className="form-control" />
+                                </div>
+                                <div className="mb-3">
+                                    <label for="password" className="form-label">Password</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        value={password}
+                                        className="form-control"
+                                        placeholder="password"
+                                        required
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+                                <div className="row-fluid text-center">
+                                    <button className="btn btn-secondary" type="button" onClick={handleSubmit}>Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {error && <h3>{error}</h3>}
+                </div>
             </div>
         </div>
 

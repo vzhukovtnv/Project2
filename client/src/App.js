@@ -15,10 +15,17 @@ import ModifyClientPage from './pages/ModifyClientPage';
 import Admin from './pages/Admin';
 import Setting from './pages/Setting';
 import Stocks from './pages/Stocks';
+import React from 'react';
 
 function App() {
   return (
+    
     <Router>
+      {/* <Container></Container> */}
+      {/* <div className="App"> */}
+      {/* <Stocks></Stocks> */}
+    {/* </div> */}
+    
       <div className="App">
         <Titlebar />
         <div className="content">

@@ -6,12 +6,17 @@ const TitleBar = () => {
     return (
         <div className="title-bar">
             {  isPending && <h1>Stock Simulator</h1>}
-            { !isPending && data && <h1>{data.name}</h1>}
+            { !isPending && data && <h1>{"Stock Simulator - "+ data.name}</h1>}
             { error && <div>{error}</div>}
         
 
         </div>
     );
 }
+
+
+
+
+
 
 export default TitleBar;

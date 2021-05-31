@@ -9,6 +9,7 @@ router.get('/:id/:full', async (req, res) => {
   const id = req.params.id;
   const full = req.params.full === 'true'
   //console.info(`fetch Stock ` + full);
+  console.log("Stocks data fetched !")
   data = await fetchStockModule.fetchStock(id, full);
   if (data == null) {
     console.log(id + " Client not found");
@@ -23,6 +24,7 @@ router.get('/:id/:full', async (req, res) => {
 
 router.post('/:id/watch', async (req, res) => {
   try {
+    console.log("watcH")
     const id = req.params.id;
     const action = req.body;
     const symbol = action.symbol;
