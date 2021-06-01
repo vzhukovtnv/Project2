@@ -1,18 +1,20 @@
-import { Link  } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // import React, { useEffect, useState } from 'react';
 
 //import useFetch from "../utils/useFetch";
 
-const Navbar = ({pageName, id}) => {
+const Navbar = ({ pageName, id }) => {
 
     let isHome = false;
     let isLogin = false;
     let isLogout = false;
     let isSignUp = false;
-    let isModifyClient =false;
+    let isModifyClient = false;
     let isSetting = false;
     let isAdmin = false;
-    let isStock =false;
+    let isStock = false;
+    let isStockHistory = false
+    //let isTransferMoney =false;
     switch (pageName) {
         case 'Home':
             isLogin = true;
@@ -39,11 +41,22 @@ const Navbar = ({pageName, id}) => {
             isAdmin = true;
             isHome = true;
             break;
-        case 'Stocks':
+  
+            case 'Stocks':
             isHome = true;
-            isModifyClient =true;
+            isStockHistory = true;
+            isModifyClient = true;
             break;
 
+        case 'StocksHistory':
+            isHome = true;
+//          isStock = true;
+            break;
+
+        case 'TransferMoney':
+            isHome = true;
+            isAdmin = true;
+            break;
 
         default:
             break;
@@ -65,7 +78,7 @@ const Navbar = ({pageName, id}) => {
                 </span>}
 
                 {isModifyClient && <span>
-                    <Link to={"/modifyClient/"+id}>Modify personal information</Link>
+                    <Link to={"/modifyClient/" + id}>Modify personal information</Link>
                 </span>}
 
                 {isAdmin && <span>
@@ -73,7 +86,11 @@ const Navbar = ({pageName, id}) => {
                 </span>}
 
                 {isStock && <span>
-                    <Link to={"/stocks/"+id}>Stocks</Link>
+                    <Link to={"/stocks/" + id}>Stocks</Link>
+                </span>}
+
+                {isStockHistory && <span>
+                    <Link to={"/stocksHistory/"}>Stocks History</Link>
                 </span>}
 
 

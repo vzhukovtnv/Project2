@@ -15,17 +15,12 @@ import ModifyClientPage from './pages/ModifyClientPage';
 import Admin from './pages/Admin';
 import Setting from './pages/Setting';
 import Stocks from './pages/Stocks';
-import React from 'react';
+import StocksHistory from './pages/StocksHistory';
+import TransferMoney from './pages/TransferMoney';
 
 function App() {
   return (
-    
     <Router>
-      {/* <Container></Container> */}
-      {/* <div className="App"> */}
-      {/* <Stocks></Stocks> */}
-    {/* </div> */}
-    
       <div className="App">
         <Titlebar />
         <div className="content">
@@ -42,31 +37,21 @@ function App() {
             <Route path="/modifyClient/:id">
               <ModifyClientPage/>
               </Route>
+            <Route path="/transferMoney/:id">
+              <TransferMoney/>
+              </Route>
             <Route path="/admin">
               <Admin />
             </Route>
             <Route path="/setting">
               <Setting />
             </Route>
-
             <Route path="/stocks/:id">
               <Stocks />
             </Route>
-
-
-            {/* 
-            <Route path="/clients/create">
-              <Create />
+            <Route path="/stocksHistory">
+              <StocksHistory/>
             </Route>
-            <Route path="/clients/transferMoney/:id">
-              <TransferMoney />
-            </Route>
-            <Route path="/clients/:id">
-              <ClientDetails />
-            </Route>
-            <Route  path="/clients">
-              <Home />
-            </Route> */}
 
 
             <Route path="*">

@@ -9,7 +9,7 @@ async function fetchStock(id, isFullData = false) {
     const watchList = await watchListDB.getWatchList(id);
     const portfolio = await portfolioDB.getPortfolio(id);
     const client = await clientDB.getClientById(id);
-
+ //   console.log("fetchStock - Start");
     if (!client) {
         return null;
     }
@@ -21,6 +21,7 @@ async function fetchStock(id, isFullData = false) {
     const portfolioArray = [];
     const balance = client.balance;
     let totalSum = 0.0
+   
     for (const val of unitedList) {
         const stockAll = await timeStock.intradayStocks(val.symbol, false);
         property = getPropertyName(stockAll, 1)
@@ -33,7 +34,8 @@ async function fetchStock(id, isFullData = false) {
 
         const stock = stockAll[property];
         const dataExists = Object.keys(stock).length > 0;
-
+        
+   
         if (dataExists) {
             const lastDate = getPropertyName(stock, 0);
             lastDataElement.lastDate = lastDate;
@@ -43,10 +45,10 @@ async function fetchStock(id, isFullData = false) {
             lastDataElement.close = parseFloat(stock[lastDate]["4. close"]);
             lastDataElement.volume = parseInt(stock[lastDate]["5. volume"]);
         }
-
+   
         if (val.watch) {
             const company = await companyDB.getCompanyInformation(val.symbol)
-
+   
             lastDataElement.name = company.Name;
             lastDataElement.sector = company.Sector;
             lastDataElement.industry = company.Industry;
@@ -62,7 +64,7 @@ async function fetchStock(id, isFullData = false) {
                 fullData.push({ symbol: val.symbol, data: symbalArray })
             }
         }
-
+   
         if (val.port) {
             let portfolioElement = { symbol: val.symbol, amount}
             if (dataExists){
@@ -74,12 +76,15 @@ async function fetchStock(id, isFullData = false) {
             portfolioArray.push(portfolioElement);
         }
     }
+   // console.log("fetchStock - 5");
     totalSum += balance;
     const portfolioObj = { balance, totalSum, portfolioArray }
     const resultOj = { portfolioObj, lastData };
     if (isFullData) {
         resultOj.fullData = fullData;
     }
+  //  console.log("fetchStock - End");
+
     return resultOj;
 }
 

@@ -31,7 +31,9 @@ router.post('/:id/watch', async (req, res) => {
     const operation = action.operation;
     switch (operation) {
       case "add":
-        res.send(await watchList.add(id, symbol));
+        let data = await watchList.add(id, symbol);
+        //  console.log("data=",data)  ;
+        res.send(data);
         break;
 
       case "takeAway":
@@ -57,17 +59,22 @@ router.post('/:id/portfolio', async (req, res) => {
   try {
     const id = req.params.id;
     const action = req.body;
+
+    //console.log("portfolio");
+    //console.log(action);
+    
     const symbol = action.symbol;
     const operation = action.operation;
     const amount = action.amount;
     const price = action.price;
 
     if (operation === "buy" || operation === "sell") {
-      const { result, message } = operation === "buy" ?
+      
+      const { ok, message } = (operation === "buy") ?
         await operations.buy(id, symbol, price, amount) :
         await operations.sell(id, symbol, price, amount);
-
-      if (result) {
+      console.log("buy or sell")
+      if (ok) {
         res.send(result);
       } else {
         console.log(message);
@@ -80,10 +87,10 @@ router.post('/:id/portfolio', async (req, res) => {
     }
   }
   catch (error) {
-  const s = "Portfolio action error: " + error;
-  console.error(s);
-  res.status(500).send(s);
-}
+    const s = "Portfolio action error: " + error.message;
+    console.error(s);
+    res.status(500).send(s);
+  }
 })
 
 

@@ -5,7 +5,7 @@ const alphaKey  = require("./alphaKey")
 
 async function getStockSeries(func, symbol, outputsize){
     
-    const url = `https://www.alphavantage.co/query?function=${func}&symbol=${symbol}&outputsize=${outputsize}` + await alphaKey.getAlphaKey();
+    const url = `https://www.alphavantage.co/query?function=${func}&symbol=${symbol}&outputsize=${outputsize}` + await alphaKey.getAlphaKey(true);
     //console.log(url);
     try {
         let responce = await fetch(url);

@@ -37,10 +37,20 @@ async function getCompanyInformation(symbol) {
          //console.log("from db");
          return  company;
     }
-    
-    //console.log("load from alpha");
     company = await getCompanyInformationAlpha(symbol);
+    if (company){
+        if(isNaN(company.FullTimeEmployees)){
+            company.FullTimeEmployees =0;
+        }
+        if(isNaN(company.MarketCapitalization)){
+            company.MarketCapitalization =0;
+        }
+    }
+    // console.log(company);
+
     if (Object.keys(company).length > 0 ){
+        // console.log("Save companyload from alpha");
+        // console.log(company);
         await saveCompanyInformation(company);
     }
     return company;
@@ -51,7 +61,8 @@ async function saveCompanyInformation(company) {
   }
 
 async function getCompanyInformationAlpha(symbol){
-    let url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + symbol +"&apikey=" + alphaKey.getAlphaKey();
+    let url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + symbol + await alphaKey.getAlphaKey();
+    //console.log(url)
     try {
         let responce = await fetch(url);
         if ( responce.ok){

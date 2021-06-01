@@ -11,25 +11,26 @@ async function buy(id, symbol, price, amount) {
     if (price <= 0) {
         return { ok: false, message: "Price is unknown" };
     }
+  
     client = await clientDB.getClientById(id)
     company = await settingDB.getSetting()
     if (!client || !company) {
         return { ok: false, message: "Server error - client lost" };
     }
+
     const delta = Math.round(amount * price + company.commission);
     if (delta > client.balance) {
-        return { ok: false, message: "Not enoupgh money to buy this stocks" };
+        return { ok: false, message: "Not enoupgh money to buy this stock" };
     }
 
     let newBalance = client.balance - delta;
-
     await clientDB.updateClient(id, { balance: newBalance });
-
     newBalance = company.balance + company.commission;
     await settingDB.setSetting({ balance: newBalance });
-
+  
     await portfolioDB.add(id, symbol, amount);
     return { ok: true, message: "" };
+  
 }
 
 async function sell(id, symbol, price, amount) {
