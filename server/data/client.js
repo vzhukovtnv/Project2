@@ -59,7 +59,7 @@ async function createClient(newClient) {
 }
 
 async function getClientList() {
-    return clientModel.find({}, 'role firstName lastName',).sort({ lastName: 1, firstName: 1 }).exec();
+    return clientModel.find({}, 'role firstName lastName id',).sort({ lastName: 1, firstName: 1 }).exec();
 }
 
 async function transferMoney(id, transf) {

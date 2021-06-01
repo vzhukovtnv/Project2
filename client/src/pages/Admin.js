@@ -1,9 +1,13 @@
 import Navbar from "../components/Navbar"
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+
 
 
 const ClientList = () => {
     const [rows, setRows] = useState([]);
+
+    const history = useHistory();
 
     useEffect(() => {
         const getClients = async () => {
@@ -32,7 +36,7 @@ const ClientList = () => {
                 <tr><th>First Name</th><th>Last Name</th></tr>
                 {rows.map((row) => {
                     return (                                     
-                        <tr key={row.name} >
+                        <tr key={row.name} onClick={() => { history.push('/transfermoney/' + row._id)}} >
                             <td>{row.firstName}</td>
                             <td>{row.lastName}</td>
                           

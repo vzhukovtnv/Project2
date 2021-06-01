@@ -13,6 +13,7 @@ const Navbar = ({pageName, id}) => {
     let isSetting = false;
     let isAdmin = false;
     let isStock =false;
+    //let isTransferMoney =false;
     switch (pageName) {
         case 'Home':
             isLogin = true;
@@ -42,6 +43,10 @@ const Navbar = ({pageName, id}) => {
         case 'Stocks':
             isHome = true;
             isModifyClient =true;
+            break;
+        case 'TransferMoney':
+            isHome = true;
+            isAdmin = true;
             break;
 
 

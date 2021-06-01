@@ -15,6 +15,7 @@ import ModifyClientPage from './pages/ModifyClientPage';
 import Admin from './pages/Admin';
 import Setting from './pages/Setting';
 import Stocks from './pages/Stocks';
+import TransferMoney from './pages/TransferMoney';
 
 function App() {
   return (
@@ -34,6 +35,9 @@ function App() {
             </Route>
             <Route path="/modifyClient/:id">
               <ModifyClientPage/>
+              </Route>
+            <Route path="/transferMoney/:id">
+              <TransferMoney/>
               </Route>
             <Route path="/admin">
               <Admin />
