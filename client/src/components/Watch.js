@@ -3,7 +3,7 @@ import Plot from 'react-plotly.js';
 
 
 
-const Watch = ({ stock, buySellAction, closeAction }) => {
+const Watch = ({ stock, fullElement, buySellAction, closeAction }) => {
     const [lastData, setLastData] = useState();
     //   const [fullData, setFullData] = useState(props.fullData);
 
@@ -11,14 +11,17 @@ const Watch = ({ stock, buySellAction, closeAction }) => {
     const [buyAmount, setBuyAmount] = useState();
     const [sellAmount, setSellAmount] = useState();
 
-    let  stockChartXValues =[1, 2, 3, 4, 5, 6];
-    let  stockChartYValues =[2, 3, 4, 5, 3, 1];
+    const [stockChartXValues, setStockChartXValues] = useState([]);
+    const [stockChartYValues, setStockChartYValues] = useState([]);
+    //let  stockChartXValues =[1, 2, 3, 4, 5, 6];
+    //let  stockChartYValues =[2, 3, 4, 5, 3, 1];
 
 
 
     useEffect(() => {
         const wachChange = async () => {
             setLastData(stock);
+            setChartValues();
             if (stock && stock.close) {
                 if (stock.amount) {
                     setSellAmount(stock.amount);
@@ -28,9 +31,26 @@ const Watch = ({ stock, buySellAction, closeAction }) => {
             setArrowBottom(true);
         };
         wachChange();
-    }, [stock]);
+    }, [stock, fullElement]);
 
+    function setChartValues() {
+        if (!fullElement || !fullElement.data ) {
+ //           alert("No fulldata for "+ stock.symbol)
+            setStockChartXValues([]);
+            setStockChartYValues([]);
+            return
+        } else {
+            const xArray =[];
+            const yArray =[];
+            for (const iterator of fullElement.data) {
+                xArray.push(iterator.dateS);
+                yArray.push(iterator.close);
+            }
+            setStockChartXValues(xArray);
+            setStockChartYValues(yArray);
 
+        }
+    }
     function topBottomEvent() {
         setArrowBottom(!arrowBottom);
     }

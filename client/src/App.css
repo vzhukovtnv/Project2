@@ -49,7 +49,7 @@ position: relative;
 text-align: center;
 }
 
-/* Vladimir added for stocks part */
+/* Vladimir added for stocks part below */
 
 .watch-element {
   border-style: solid;
@@ -62,7 +62,6 @@ text-align: center;
   width:32px;
   width:32px;
 }
-
 
 .top-bottom-arrow-button {
   width:32px;
@@ -80,12 +79,44 @@ text-align: center;
 .sell-amount-group{
   float:right
 }
-
+/* 
 .small-green-box{
   width: 10px;
   height:10px;
   bottom:0 ;
   background: chartreuse;
   text-align: right;
+} */
+
+.portfolio{
+  text-align: right;
+  vertical-align: top;
+  width:50ch;
+
 }
-/* Vladimir added for stocks part */
+/* 
+.stocks {
+  overflow: scroll;
+} */
+
+.portfolio table{
+  width: 50ch;
+  /* top:0; */
+}
+
+.portfolio > div{
+  position: fixed;
+  /* top:0; */
+}
+
+table.center {
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+.center-setting {
+  text-align :center
+}
+
+
+/* Vladimir added for stocks part end */

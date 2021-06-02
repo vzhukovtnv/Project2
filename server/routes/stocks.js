@@ -4,6 +4,24 @@ const router = express.Router();
 const fetchStockModule = require('../business/fetchStock');
 const operations = require('../business/operations');
 const watchList = require('../data/watchList');
+const setting = require('../data/setting');
+
+router.get('/timeInterval', async (req, res) => {
+  console.log("Time interval fetched !")
+  
+  data = await setting.getSetting();
+  if (data == null) {
+    console.error(" Setting didn't retrive");
+    res.sendStatus(500);
+  }
+  else {
+    let ti = data.interval;
+    ti = parseInt(ti);
+    res.send({timeInterval:ti});
+  }
+});
+
+
 
 router.get('/:id/:full', async (req, res) => {
   const id = req.params.id;
@@ -69,7 +87,7 @@ router.post('/:id/portfolio', async (req, res) => {
     const price = action.price;
 
     if (operation === "buy" || operation === "sell") {
-      
+      console.log("Portfolio ",operation);
       const { ok, message } = (operation === "buy") ?
         await operations.buy(id, symbol, price, amount) :
         await operations.sell(id, symbol, price, amount);

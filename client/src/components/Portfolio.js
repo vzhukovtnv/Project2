@@ -15,7 +15,7 @@ const Portfolio = ({ portfolioObj }) => {
         <div>
             <h3>Portfolio</h3>
             { portfolio &&
-                <table>
+                <table >
                     <tr>
                         <th>Symbol</th>
                         <th>Amount</th>
@@ -28,7 +28,7 @@ const Portfolio = ({ portfolioObj }) => {
                         if ('price' in stock) {
                             price = stock.price;
                             sumStock = price * stock.amount;
-                            sumStock = sumStock.toFixed(0);
+                            sumStock = Math.round(sumStock);
                         } else {
                             price = '';
                             sumStock = '';
@@ -53,7 +53,7 @@ const Portfolio = ({ portfolioObj }) => {
                         <td>Total:</td>
                         <td></td>
                         <td></td>
-                        <td colspan="3">{portfolio.totalSum.toFixed(0)} </td>
+                        <td colspan="3">{Math.round(portfolio.totalSum)} </td>
 
                     </tr>
 

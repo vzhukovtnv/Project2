@@ -46,9 +46,9 @@ async function getCompanyInformation(symbol) {
             company.MarketCapitalization =0;
         }
     }
-    // console.log(company);
+    //  console.log(company);
 
-    if (Object.keys(company).length > 0 ){
+    if (company && company.Symbol!=null && company.Name != null ){
         // console.log("Save companyload from alpha");
         // console.log(company);
         await saveCompanyInformation(company);
@@ -62,7 +62,7 @@ async function saveCompanyInformation(company) {
 
 async function getCompanyInformationAlpha(symbol){
     let url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + symbol + await alphaKey.getAlphaKey();
-    //console.log(url)
+    // console.log(url)
     try {
         let responce = await fetch(url);
         if ( responce.ok){
