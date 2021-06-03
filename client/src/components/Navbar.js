@@ -31,6 +31,10 @@ const Navbar = ({ pageName, id }) => {
             isHome = true;
             isStock = true;
             break;
+        case 'ModifyAdminPage':
+            isHome = true;
+            isAdmin = true;
+            break;
 
         case 'Admin':
             isHome = true;
@@ -41,8 +45,8 @@ const Navbar = ({ pageName, id }) => {
             isAdmin = true;
             isHome = true;
             break;
-  
-            case 'Stocks':
+
+        case 'Stocks':
             isHome = true;
             isStockHistory = true;
             isModifyClient = true;
@@ -50,7 +54,7 @@ const Navbar = ({ pageName, id }) => {
 
         case 'StocksHistory':
             isHome = true;
-//          isStock = true;
+            //          isStock = true;
             break;
 
         case 'TransferMoney':

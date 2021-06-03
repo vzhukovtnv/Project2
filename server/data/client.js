@@ -65,10 +65,13 @@ async function getClientList() {
 async function transferMoney(id, transf) {
     let client = null;
     try {
-        client = await clientModel.findById(id, 'balance');
+        // console.log("id=", id, " balance=", transf)
+        client = await clientModel.findById(id);
         if (client) {
             client.balance += transf;
-            return clientModel.updateClient(id, client);
+            //console.log("before update")
+            return updateClient(id,client );
+            //return clientModel.updateClient(id, client);
         }
     } catch (err) {
         console.error("err=", err)
@@ -81,7 +84,7 @@ async function chkLogin(eM, pas) {
     let client = null;
     try {
         client = clientModel.findOne({ eMail:eM, password:pas }, 'role');
-        client;
+        // client;
         return client;
     } catch (err) {
         console.error("err=", err)

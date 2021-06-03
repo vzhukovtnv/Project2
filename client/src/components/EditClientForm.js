@@ -11,7 +11,7 @@ const EditClientForm = ({ id, editRole, buttonCaption, submitMessage }) => {
     const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
     const [error, setError] = useState();
 
-    
+
     useEffect(() => {
         const getClient = async () => {
             if (!id) { return }
@@ -29,7 +29,8 @@ const EditClientForm = ({ id, editRole, buttonCaption, submitMessage }) => {
                     setLastName(data.lastName);
                     setPhone(data.phone);
                     setEMail(data.eMail);
-                    setRole(data.role)
+                    setRole(data.role);
+                    // alert(data.role)
                 } else {
                     setError("Server Error 2")
                 }
@@ -54,7 +55,7 @@ const EditClientForm = ({ id, editRole, buttonCaption, submitMessage }) => {
 
         } else {
             method = "POST";
-            client = { firstName, lastName, phone, eMail, password, role: 0, balance:0 };
+            client = { firstName, lastName, phone, eMail, password, role: 0, balance: 0 };
         }
         try {
             let response = await fetch(url, {
@@ -74,6 +75,12 @@ const EditClientForm = ({ id, editRole, buttonCaption, submitMessage }) => {
         }
     }
 
+    function handleCheck()
+    {
+        setRole(!role);
+        alert("reole="+role)
+    }
+    // alert("role="+role)
     return (
         <div className="registratioon-fosetting">
 
@@ -136,19 +143,39 @@ const EditClientForm = ({ id, editRole, buttonCaption, submitMessage }) => {
                         />
                     </div>
 
-                    {   !id && <div>
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                                value={password}
-                                className="input-field"
-                                placeholder="Enter password"
-                                required
-                                onChange={(e) => setPassword(e.target.value)}
+                    {!id && <div>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            value={password}
+                            className="input-field"
+                            placeholder="Enter password"
+                            required
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    }
+                    {editRole && role!=null &&<div>
+                        {/* <label>
+                            <Checkbox
+                                checked={this.state.checked}
+                                onChange={this.handleCheckboxChange}
                             />
-                        </div>
+                            <span>Label Text</span>
+                        </label>
+ */}
+
+
+                        <label htmlFor="administrator">Administrator</label>
+                        <input type="checkbox"
+                            id="administrator"
+                            name="administrator"
+                            checked={role ===1 }
+                            onChange={(e) => handleCheck()}
+                        />
+                    </div>
                     }
                     <button className="submit-btn" onClick={onSave} disabled={submitButtonDisabled}>{buttonCaption}</button>
 

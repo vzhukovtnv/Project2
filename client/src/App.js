@@ -17,6 +17,7 @@ import Setting from './pages/Setting';
 import Stocks from './pages/Stocks';
 import StocksHistory from './pages/StocksHistory';
 import TransferMoney from './pages/TransferMoney';
+import ModifyAdminPage from './pages/ModifyAdminPage';
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
             </Route>
             <Route path="/setting">
               <Setting />
+            </Route>
+            <Route path="/modifyadminpage/:id">
+              <ModifyAdminPage />
             </Route>
             <Route path="/stocks/:id">
               <Stocks />

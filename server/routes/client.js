@@ -92,12 +92,15 @@ router.delete("/:id", async (req, res) => {
 
 
 
-router.put('/:id/:transfer', async function (req, res) {
-  let updatedClient = req.body
+router.put('/:id/transfer', async function (req, res) {
   try {
-    let data = await clientDB.transferMoney(req.params.id, req.params.transfer);
+    // console.log("started transfer ", req.body)
+    let updatedClient = req.body
+    let transfer = updatedClient.transfer;
+    // console.log(transfer)
+    let data = await clientDB.transferMoney(req.params.id, transfer);
     if (data) {
-      console.log("Money transfered $", req.params.transfer)
+      console.log("Money transfered $", transfer)
       res.send(data);
     }else{
       console.error("Can't transfer money, client ", req.params.id)
