@@ -52,6 +52,11 @@ const Navbar = ({ pageName, id }) => {
             isModifyClient = true;
             break;
 
+            case 'News':
+                isHome = true;
+                isStockHistory = true;
+            break;
+
         case 'StocksHistory':
             isHome = true;
             //          isStock = true;
@@ -94,9 +99,12 @@ const Navbar = ({ pageName, id }) => {
                 </span>}
 
                 {isStockHistory && <span>
-                    <Link to={"/stocksHistory/"}>Stocks History</Link>
+                    <Link to={"/stocksHistory/"}>Stock History</Link>
                 </span>}
 
+                {isStockHistory && <span>
+                    <Link to={"/news/"}>News</Link>
+                </span>} 
 
                 {isSetting && <span>
                     <Link to="/setting">Setting</Link>

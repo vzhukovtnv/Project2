@@ -74,7 +74,7 @@ const Login = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
-                                <div className="row-fluid text-center">
+                                  <div className="row-fluid text-center">
                                     <button className="btn btn-secondary" type="button" onClick={handleSubmit}>Login</button>
                                 </div>
                             </form>

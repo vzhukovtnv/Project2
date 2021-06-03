@@ -86,8 +86,8 @@ const TransferMoney = () => {
                         </td>
                     </tr>
                     <tr>
-                        <td colSpan="2">
-                            <button type="button" className="center-setting" onClick={handleSubmit}>Transfer</button>
+                        <td colSpan="2" className="center-setting" >
+                            <button type="button" onClick={handleSubmit}>Transfer</button>
                         </td>
                     </tr>
                     {/* </form> */}

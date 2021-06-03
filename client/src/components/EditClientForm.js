@@ -29,8 +29,7 @@ const EditClientForm = ({ id, editRole, buttonCaption, submitMessage }) => {
                     setLastName(data.lastName);
                     setPhone(data.phone);
                     setEMail(data.eMail);
-                    setRole(data.role);
-                    // alert(data.role)
+                    setRole(data.role !==0)
                 } else {
                     setError("Server Error 2")
                 }
@@ -55,7 +54,7 @@ const EditClientForm = ({ id, editRole, buttonCaption, submitMessage }) => {
 
         } else {
             method = "POST";
-            client = { firstName, lastName, phone, eMail, password, role: 0, balance: 0 };
+            client = { firstName, lastName, phone, eMail, password, role: (role ?1:0), balance: 0 };
         }
         try {
             let response = await fetch(url, {
@@ -75,116 +74,125 @@ const EditClientForm = ({ id, editRole, buttonCaption, submitMessage }) => {
         }
     }
 
-    function handleCheck()
-    {
-        setRole(!role);
-        alert("reole="+role)
-    }
+    // function handleCheck() {
+    //     setRole(!role);
+    //     alert("reole=" + role)
+    // }
     // alert("role="+role)
     return (
-        <div className="registratioon-fosetting">
+        <div className="card"  >
+            <div className="card-title text-center" >
+                <div className="col-3 offset-4" >
+                    <div className="registration-fosetting">
+                        <div className="card-body">
 
-            <div>
-                <form id="registration-form" className="input-group">
-                    <div>
-                        <label htmlFor="firstName">First Name:</label>
-                        <input
-                            type="text"
-                            name="firstName"
-                            id="firstName"
-                            value={firstName}
-                            className="input-field"
-                            placeholder="Enter first name"
-                            required
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
+                            <form id="registration-form" className="card-title text-center" >
+                                <div >
+                                    <label htmlFor="firstName">First Name</label>
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        id="firstName"
+                                        value={firstName}
+                                        className="input-field"
+                                        placeholder="Enter first name"
+                                        required
+                                        className="form-control"
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="lastName">Last Name</label>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        id="lastName"
+                                        value={lastName}
+                                        className="input-field"
+                                        placeholder="Enter Last name"
+                                        required
+                                        className="form-control"
+                                        onChange={(e) => setLastName(e.target.value)}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="phone">Phone</label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        id="phone"
+
+                                        value={phone}
+                                        className="input-field"
+                                        placeholder="Enter phone"
+                                        required
+                                        className="form-control"
+                                        onChange={(e) => setPhone(e.target.value)}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="eMail">Email</label>
+                                    <input
+                                        type="email"
+                                        name="eMail"
+                                        id="eMail"
+                                        value={eMail}
+                                        className="input-field"
+                                        placeholder="Enter eMail"
+                                        required
+                                        className="form-control"
+                                        onChange={(e) => setEMail(e.target.value)}
+                                    />
+                                </div>
+                                {!id && <div>
+                                    <label htmlFor="password">Password</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        value={password}
+                                        className="input-field"
+                                        placeholder="Enter password"
+                                        required
+                                        className="form-control"
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+                                }
+
+                                {editRole && role != null && <div>
+                                    <label htmlFor="administrator">Administrator</label>
+                                    <input type="checkbox"
+                                        id="administrator"
+                                        name="administrator"
+                                        checked={role}
+                                        onChange={(e) =>setRole(!role)}
+                                    />
+                                </div>
+                                }
+
+
+
+
+                                <br></br>
+                                <div className="d-grid gap-2" >
+                                    <button type="button" class="btn btn-primary" onClick={onSave} disabled={submitButtonDisabled}>{buttonCaption}</button>
+                                </div>
+
+
+                            </form>
+                            {error && <h3>{error}</h3>}
+
+
+                        </div>
+
+
                     </div>
-
-                    <div>
-                        <label htmlFor="lastName">Last Name:</label>
-                        <input
-                            type="text"
-                            name="lastName"
-                            id="lastName"
-                            value={lastName}
-                            className="input-field"
-                            placeholder="Enter Last name"
-                            required
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="phone">Phone:</label>
-                        <input
-                            type="tel"
-                            name="phone"
-                            id="phone"
-                            value={phone}
-                            className="input-field"
-                            placeholder="Enter phone"
-                            required
-                            onChange={(e) => setPhone(e.target.value)}
-                        />
-                    </div>
-
-
-                    <div>
-                        <label htmlFor="eMail">eMail:</label>
-                        <input
-                            type="email"
-                            name="eMail"
-                            id="eMail"
-                            value={eMail}
-                            className="input-field"
-                            placeholder="Enter eMail"
-                            required
-                            onChange={(e) => setEMail(e.target.value)}
-                        />
-                    </div>
-
-                    {!id && <div>
-                        <label htmlFor="password">Password</label>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            value={password}
-                            className="input-field"
-                            placeholder="Enter password"
-                            required
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-                    }
-                    {editRole && role!=null &&<div>
-                        {/* <label>
-                            <Checkbox
-                                checked={this.state.checked}
-                                onChange={this.handleCheckboxChange}
-                            />
-                            <span>Label Text</span>
-                        </label>
- */}
-
-
-                        <label htmlFor="administrator">Administrator</label>
-                        <input type="checkbox"
-                            id="administrator"
-                            name="administrator"
-                            checked={role ===1 }
-                            onChange={(e) => handleCheck()}
-                        />
-                    </div>
-                    }
-                    <button className="submit-btn" onClick={onSave} disabled={submitButtonDisabled}>{buttonCaption}</button>
-
-                </form>
-                {error && <h3>{error}</h3>}
-
+                </div>
             </div>
         </div>
     );
+
 }
 
 export default EditClientForm;

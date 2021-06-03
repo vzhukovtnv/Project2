@@ -57,7 +57,7 @@ const AddWatch = ({createWatch,id}) => {
 
     return (
         <div className="eeee">
-            <h4>Add new stock</h4>
+            <h4>Add a new stock</h4>
             {/* Form is evil !!! */}
             {/* <form id="add-new-stock-form" className="input-group"> */}
                 <label htmlFor="symbol">Stock:</label>
